@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Digital Store</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    <main>
+        <div class="product-form">
+            <h2>Add New Product</h2>
+            <form id="product-form">
+                <label for="product-name">Product Name:</label>
+                <input type="text" id="product-name" name="product-name" required>
+                <label for="product-description">Description:</label>
+                <textarea id="product-description" name="product-description" required></textarea>
+                <label for="product-image">Product Image:</label>
+                <input type="file" id="product-image" name="product-image" accept="image/*" required>
+                <button type="submit">Add Product</button>
+            </form>
+        </div>
+    </main>
+        <button id="logout-button">Logout</button>
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>
+
+<script>
+    // Periksa apakah pengguna telah login saat halaman dimuat
+    window.onload = function() {
+        var isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        if (!isLoggedIn) {
+            // Jika pengguna belum login, arahkan ke halaman login
+            window.location.href = 'login.html';
+        }
+    };
+</script>
+
+<script>
+    // Periksa apakah pengguna telah login saat halaman dimuat
+    window.onload = function() {
+        var isLoggedIn = sessionStorage.getItem('isLoggedIn');
+        if (!isLoggedIn) {
+            // Jika pengguna belum login, arahkan ke halaman login
+            window.location.href = 'login.html';
+        }
+    };
+</script>
+
+// Fungsi untuk menambahkan tag <meta> untuk produk baru
+function addMetaTagsForProduct(productName) {
+    // Buat elemen <meta> untuk robots dan canonical
+    var metaRobots = document.createElement('meta');
+    metaRobots.setAttribute('name', 'robots');
+    metaRobots.setAttribute('content', 'index, follow');
+
+    var metaCanonical = document.createElement('link');
+    metaCanonical.setAttribute('rel', 'canonical');
+    metaCanonical.setAttribute('href', 'URL_halaman_detail_produk');
+
+    // Tambahkan elemen <meta> ke dalam elemen <head>
+    document.head.appendChild(metaRobots);
+    document.head.appendChild(metaCanonical);
+}
+
+// Menangani unggahan produk saat formulir disubmit
+document.getElementById('product-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    var productName = this['product-name'].value;
+    var productDescription = this['product-description'].value;
+    var productImage = this['product-image'].value; // Simpan URL gambar
+    var productDetailUrl = 'URL_halaman_detail_produk'; // Ganti dengan URL halaman detail produk yang sesuai
+
+    // Proses informasi produk sesuai kebutuhan
+    // Misalnya, menyimpan informasi produk di penyimpanan lokal atau database
+    saveProductLocally(productName, productDescription, productImage);
+
+    // Menambahkan tag <meta> untuk produk baru
+    addMetaTagsForProduct(productName);
+
+    // Memperbarui meta tags untuk laman utama
+    updateHomePageMetaTags(productName, productDescription, productImage);
+
+    // Memperbarui meta tags untuk laman detail produk
+    updateProductDetailMetaTags(productName, productDescription, productImage, productDetailUrl);
+});
+
+// Fungsi untuk menghapus tag <meta> untuk produk yang dihapus
+function removeMetaTagsForProduct(productName) {
+    // Dapatkan elemen <meta> untuk robots dan canonical
+    var metaRobots = document.querySelector('meta[name="robots"]');
+    var metaCanonical = document.querySelector('link[rel="canonical"]');
+
+    // Periksa apakah elemen <meta> ada sebelum dihapus
+    if (metaRobots && metaCanonical) {
+        // Hapus elemen <meta> dari elemen <head>
+        metaRobots.remove();
+        metaCanonical.remove();
+    }
+}
+
+// Menangani penghapusan produk saat tombol hapus diklik
+document.getElementById('delete-button').addEventListener('click', function() {
+    var productNameToDelete = // Ambil nama produk yang akan dihapus dari formulir atau data yang sesuai
+    // Hapus produk dari penyimpanan lokal atau database
+    deleteProductLocally(productNameToDelete);
+    
+    // Hapus tag <meta> untuk produk yang dihapus
+    removeMetaTagsForProduct(productNameToDelete);
+    
+    // Lakukan tindakan lain yang diperlukan, misalnya memperbarui tampilan
+});
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail</title>
+    <!-- Meta tags for social media sharing -->
+    <!-- Meta tags for social media sharing -->
+    <meta property="og:title" content="Product Detail">
+    <meta property="og:description" content="Description of selected product">
+    <meta property="og:image" content="URL to thumbnail image of selected product">
+    <meta property="og:url" content="URL to product detail page">
+    <meta property="og:type" content="product">
+    <!-- Add other meta tags for SEO if needed -->
+</head>
+<body>
+    <header>
+        <h1 id="product-title">Product Detail</h1>
+    </header>
+    <main>
+        <div id="product-details">
+            <!-- Detail produk akan ditampilkan di sini -->
+        </div>
+    </main>
+    <!-- Add footer or other elements if needed -->
+</body>
+</html>
+
+<script>
+    // Ambil judul produk yang dipilih dari penyimpanan sesi
+    var selectedProduct = sessionStorage.getItem('selectedProduct');
+
+    // Menampilkan judul produk yang dipilih di judul halaman
+    document.getElementById('product-title').textContent = selectedProduct;
+
+    // Ambil data produk dari penyimpanan lokal berdasarkan judul produk yang dipilih
+    var products = JSON.parse(localStorage.getItem('products')) || [];
+    var selectedProductData = products.find(function(product) {
+        return product.name === selectedProduct;
+    });
+
+    // Menampilkan detail produk yang dipilih
+    var productDetailsContainer = document.getElementById('product-details');
+    productDetailsContainer.innerHTML = `
+        <img src="${selectedProductData.imageUrl}" alt="${selectedProductData.name}">
+        <h2>${selectedProductData.name}</h2>
+        <p>${selectedProductData.description}</p>
+        <!-- Tambahkan detail lainnya sesuai kebutuhan -->
+    `;
+
+    // Ambil judul produk yang dipilih dari penyimpanan sesi
+    var selectedProduct = sessionStorage.getItem('selectedProduct');
+
+    // Menampilkan judul produk yang dipilih di judul halaman
+    document.title = selectedProduct;
+
+    // Ambil data produk dari penyimpanan lokal berdasarkan judul produk yang dipilih
+    var products = JSON.parse(localStorage.getItem('products')) || [];
+    var selectedProductData = products.find(function(product) {
+        return product.name === selectedProduct;
+    });
+
+    // Memperbarui meta tags untuk social media sharing
+    document.querySelector('meta[property="og:title"]').setAttribute('content', selectedProductData.name);
+    document.querySelector('meta[property="og:description"]').setAttribute('content', selectedProductData.description);
+    document.querySelector('meta[property="og:image"]').setAttribute('content', selectedProductData.imageUrl);
+    // Memperbarui URL jika diperlukan
+    // document.querySelector('meta[property="og:url"]').setAttribute('content', productUrl);
+
+    // Fungsi untuk memperbarui tag <meta> untuk halaman detail produk
+    function updateProductDetailMetaTags(productName, productDescription, productImage) {
+    // Ambil elemen <meta> untuk robots dan canonical di halaman detail produk
+    var metaRobots = document.querySelector('meta[name="robots"]');
+    var metaCanonical = document.querySelector('link[rel="canonical"]');
+
+    // Perbarui konten tag <meta> sesuai dengan informasi produk baru
+    if (metaRobots && metaCanonical) {
+        metaRobots.setAttribute('content', 'index, follow');
+        metaCanonical.setAttribute('href', productDetailUrl);
+    }
+}
+
+// Fungsi untuk menghapus tag <meta> untuk produk yang dihapus
+function removeMetaTagsForProduct(productName) {
+    // Dapatkan elemen <meta> untuk robots dan canonical
+    var metaRobots = document.querySelector('meta[name="robots"]');
+    var metaCanonical = document.querySelector('link[rel="canonical"]');
+
+    // Periksa apakah elemen <meta> ada sebelum dihapus
+    if (metaRobots && metaCanonical) {
+        // Hapus elemen <meta> dari elemen <head>
+        metaRobots.remove();
+        metaCanonical.remove();
+    }
+}
+
+// Menangani penghapusan produk saat tombol hapus diklik
+document.getElementById('delete-button').addEventListener('click', function() {
+    var productNameToDelete = // Ambil nama produk yang akan dihapus dari formulir atau data yang sesuai
+    // Hapus produk dari penyimpanan lokal atau database
+    deleteProductLocally(productNameToDelete);
+    
+    // Hapus tag <meta> untuk produk yang dihapus
+    removeMetaTagsForProduct(productNameToDelete);
+    
+    // Lakukan tindakan lain yang diperlukan, misalnya memperbarui tampilan
+});
+
+
+</script>
+
