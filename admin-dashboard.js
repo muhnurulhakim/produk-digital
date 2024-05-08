@@ -1,11 +1,10 @@
 // Menangani unggahan file saat formulir disubmit
 document.getElementById('product-form').addEventListener('submit', function(event) {
     event.preventDefault();
-    
+
     var productName = this['product-name'].value;
     var productDescription = this['product-description'].value;
-    var productImage = this['product-image'].value; // Simpan URL gambar
-    // Jika ingin menggunakan fitur unggah ebook, tambahkan kode untuk mengambil URL ebook di sini
+    var productImage = URL.createObjectURL(this['product-image'].files[0]);
 
     // Proses informasi produk sesuai kebutuhan
     // Misalnya, menyimpan informasi produk di penyimpanan lokal atau database
@@ -16,6 +15,15 @@ document.getElementById('product-form').addEventListener('submit', function(even
 
     // Memperbarui meta tags untuk laman detail produk
     updateProductDetailMetaTags(productName, productDescription, productImage);
+
+    // Memperbarui daftar produk di halaman utama
+    updateProductList();
+
+    // Tampilkan notifikasi bahwa produk baru telah ditambahkan
+    alert(`Produk "${productName}" telah ditambahkan dan dapat dilihat di halaman utama.`);
+
+    // Reset form setelah produk ditambahkan
+    this.reset();
 });
 
 // Fungsi untuk memperbarui meta tags di halaman utama

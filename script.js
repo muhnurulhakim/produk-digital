@@ -14,7 +14,7 @@ function displayProducts() {
             <img src="${product.imageUrl}" alt="${product.name}">
             <h2>${product.name}</h2>
             <p>${product.description}</p>
-            <a href="product-detail.html" class="buy-button">Product Details</a>
+            <a href="product-detail.html?id=${product.id}" class="buy-button">Product Details</a>
         `;
         productListContainer.appendChild(productCard);
     });

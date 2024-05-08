@@ -26,7 +26,8 @@
 </html>
 <script>
     // Ambil judul produk yang dipilih dari penyimpanan sesi
-    var selectedProductId = sessionStorage.getItem('selectedProductId');
+    var urlParams = new URLSearchParams(window.location.search);
+    var selectedProductId = urlParams.get('id');
 
     // Menampilkan judul produk yang dipilih di judul halaman
     document.title = selectedProductId;
