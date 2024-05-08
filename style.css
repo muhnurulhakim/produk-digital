@@ -72,7 +72,7 @@ button:hover {
 }
 
 .product img {
-    max-width: 200px; /* Atur ukuran maksimum yang diinginkan */
+    max-width: 400px; /* Atur ukuran maksimum yang diinginkan */
     height: auto;
     border-bottom: 1px solid #ccc;
 }
