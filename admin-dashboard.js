@@ -85,13 +85,12 @@ function removeMetaTagsForProduct(productId) {
         metaCanonical.remove();
     }
 }
-
+});
+    
 // Tangani klik pada tombol logout
 document.getElementById('logout-button').addEventListener('click', function() {
     // Hapus status login dari penyimpanan sesi
     sessionStorage.removeItem('isLoggedIn');
     // Redirect pengguna ke halaman login
     window.location.href = 'login.html';
-});
-
 });
