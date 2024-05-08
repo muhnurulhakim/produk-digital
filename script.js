@@ -9,6 +9,7 @@ function displayProducts() {
     products.forEach(function(product) {
         var productCard = document.createElement('div');
         productCard.classList.add('product');
+        productCard.setAttribute('id', 'product-' + product.id); // Tambahkan id unik untuk setiap produk
         productCard.innerHTML = `
             <img src="${product.imageUrl}" alt="${product.name}">
             <h2>${product.name}</h2>
@@ -25,11 +26,11 @@ displayProducts();
 // Menangani klik pada tombol "Product Details"
 document.getElementById('product-list').addEventListener('click', function(event) {
     if (event.target.classList.contains('buy-button')) {
-        // Dapatkan judul produk yang diklik
-        var productName = event.target.parentElement.querySelector('h2').textContent;
+        // Dapatkan id produk yang diklik
+        var productId = event.target.parentElement.getAttribute('id').split('-')[1];
 
-        // Simpan judul produk yang diklik ke penyimpanan sesi
-        sessionStorage.setItem('selectedProduct', productName);
+        // Simpan id produk yang diklik ke penyimpanan sesi
+        sessionStorage.setItem('selectedProductId', productId);
     }
 });
 
@@ -43,19 +44,5 @@ function updateHomePageMetaTags(productName, productDescription, productImage) {
     if (metaRobots && metaCanonical) {
         metaRobots.setAttribute('content', 'index, follow');
         metaCanonical.setAttribute('href', 'URL_halaman_detail_produk');
-    }
-}
-
-// Fungsi untuk menghapus tag <meta> untuk produk yang dihapus
-function removeMetaTagsForProduct(productName) {
-    // Dapatkan elemen <meta> untuk robots dan canonical
-    var metaRobots = document.querySelector('meta[name="robots"]');
-    var metaCanonical = document.querySelector('link[rel="canonical"]');
-
-    // Periksa apakah elemen <meta> ada sebelum dihapus
-    if (metaRobots && metaCanonical) {
-        // Hapus elemen <meta> dari elemen <head>
-        metaRobots.remove();
-        metaCanonical.remove();
     }
 }

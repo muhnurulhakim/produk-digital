@@ -38,6 +38,7 @@ function updateProductDetailMetaTags(name, description, imageUrl, productUrl) {
 // Fungsi untuk menyimpan data produk di penyimpanan lokal
 function saveProductLocally(name, description, imageUrl) {
     var productData = {
+        id: Date.now(), // Menggunakan timestamp sebagai id unik
         name: name,
         description: description,
         imageUrl: imageUrl
@@ -49,32 +50,20 @@ function saveProductLocally(name, description, imageUrl) {
     localStorage.setItem('products', JSON.stringify(products));
 }
 
-// Fungsi untuk menambahkan tag <meta> untuk produk baru
-function addMetaTagsForProduct(productName) {
-    // Buat elemen <meta> untuk robots dan canonical
-    var metaRobots = document.createElement('meta');
-    metaRobots.setAttribute('name', 'robots');
-    metaRobots.setAttribute('content', 'index, follow');
+// Fungsi untuk menghapus produk dari penyimpanan lokal
+function deleteProductLocally(productId) {
+    var products = JSON.parse(localStorage.getItem('products')) || [];
+    products = products.filter(function(product) {
+        return product.id !== productId;
+    });
+    localStorage.setItem('products', JSON.stringify(products));
 
-    var metaCanonical = document.createElement('link');
-    metaCanonical.setAttribute('rel', 'canonical');
-    metaCanonical.setAttribute('href', 'URL_halaman_detail_produk');
-
-    // Tambahkan elemen <meta> ke dalam elemen <head>
-    document.head.appendChild(metaRobots);
-    document.head.appendChild(metaCanonical);
+    // Hapus tag <meta> untuk produk yang dihapus
+    removeMetaTagsForProduct(productId);
 }
 
-// Tangani klik pada tombol logout
-document.getElementById('logout-button').addEventListener('click', function() {
-    // Hapus status login dari penyimpanan sesi
-    sessionStorage.removeItem('isLoggedIn');
-    // Redirect pengguna ke halaman login
-    window.location.href = 'login.html';
-});
-
 // Fungsi untuk menghapus tag <meta> untuk produk yang dihapus
-function removeMetaTagsForProduct(productName) {
+function removeMetaTagsForProduct(productId) {
     // Dapatkan elemen <meta> untuk robots dan canonical
     var metaRobots = document.querySelector('meta[name="robots"]');
     var metaCanonical = document.querySelector('link[rel="canonical"]');
@@ -87,14 +76,10 @@ function removeMetaTagsForProduct(productName) {
     }
 }
 
-// Menangani penghapusan produk saat tombol hapus diklik
-document.getElementById('delete-button').addEventListener('click', function() {
-    var productNameToDelete = // Ambil nama produk yang akan dihapus dari formulir atau data yang sesuai
-    // Hapus produk dari penyimpanan lokal atau database
-    deleteProductLocally(productNameToDelete);
-    
-    // Hapus tag <meta> untuk produk yang dihapus
-    removeMetaTagsForProduct(productNameToDelete);
-    
-    // Lakukan tindakan lain yang diperlukan, misalnya memperbarui tampilan
+// Tangani klik pada tombol logout
+document.getElementById('logout-button').addEventListener('click', function() {
+    // Hapus status login dari penyimpanan sesi
+    sessionStorage.removeItem('isLoggedIn');
+    // Redirect pengguna ke halaman login
+    window.location.href = 'login.html';
 });

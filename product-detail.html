@@ -26,15 +26,15 @@
 </html>
 <script>
     // Ambil judul produk yang dipilih dari penyimpanan sesi
-    var selectedProduct = sessionStorage.getItem('selectedProduct');
+    var selectedProductId = sessionStorage.getItem('selectedProductId');
 
     // Menampilkan judul produk yang dipilih di judul halaman
-    document.title = selectedProduct;
+    document.title = selectedProductId;
 
-    // Ambil data produk dari penyimpanan lokal berdasarkan judul produk yang dipilih
+    // Ambil data produk dari penyimpanan lokal berdasarkan id produk yang dipilih
     var products = JSON.parse(localStorage.getItem('products')) || [];
     var selectedProductData = products.find(function(product) {
-        return product.name === selectedProduct;
+        return product.id === selectedProductId;
     });
 
     // Memperbarui meta tags untuk social media sharing
@@ -53,6 +53,9 @@
         <!-- Tambahkan detail lainnya sesuai kebutuhan -->
     `;
 
+    // Memperbarui tag <meta> untuk halaman detail produk
+    updateProductDetailMetaTags(selectedProductData.name, selectedProductData.description, selectedProductData.imageUrl);
+
     // Fungsi untuk memperbarui tag <meta> untuk halaman detail produk
     function updateProductDetailMetaTags(productName, productDescription, productImage) {
         // Ambil elemen <meta> untuk robots dan canonical di halaman detail produk
@@ -65,32 +68,4 @@
             metaCanonical.setAttribute('href', productDetailUrl);
         }
     }
-
-    // Fungsi untuk menghapus tag <meta> untuk produk yang dihapus
-    function removeMetaTagsForProduct(productName) {
-        // Dapatkan elemen <meta> untuk robots dan canonical
-        var metaRobots = document.querySelector('meta[name="robots"]');
-        var metaCanonical = document.querySelector('link[rel="canonical"]');
-
-        // Periksa apakah elemen <meta> ada sebelum dihapus
-        if (metaRobots && metaCanonical) {
-            // Hapus elemen <meta> dari elemen <head>
-            metaRobots.remove();
-            metaCanonical.remove();
-        }
-    }
-
-    // Menangani penghapusan produk saat tombol hapus diklik
-    document.getElementById('delete-button').addEventListener('click', function() {
-        var productNameToDelete = // Ambil nama produk yang akan dihapus dari formulir atau data yang sesuai
-        // Hapus produk dari penyimpanan lokal atau database
-        deleteProductLocally(productNameToDelete);
-        
-        // Hapus tag <meta> untuk produk yang dihapus
-        removeMetaTagsForProduct(productNameToDelete);
-        
-        // Lakukan tindakan lain yang diperlukan, misalnya memperbarui tampilan
-    });
 </script>
-</document_content>
-</document>
