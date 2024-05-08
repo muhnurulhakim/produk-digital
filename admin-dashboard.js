@@ -64,7 +64,7 @@ function uploadImageToGitHubPages(file) {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/vnd.github.v3+json',
-          'Authorization': 'Bearer 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'
+          'Authorization': 'Bearer "isi kode pat di sini"'
         },
         body: JSON.stringify({
           message: 'Upload gambar produk',
