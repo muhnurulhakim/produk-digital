@@ -1,17 +1,3 @@
-const loginForm = document.getElementById('login-form');
-
-loginForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const email = this.email.value;
-    const password = this.password.value;
-    // Check login credentials
-    if (email === 'muina@duck.com' && password === '?1$1&;):$2&ghqhgahajabh') {
-        window.location.href = 'admin.html'; // Redirect to admin dashboard
-    } else {
-        alert('Email atau password salah. Silakan coba lagi.');
-    }
-});
-
 // Ambil data produk dari penyimpanan lokal dan tampilkan di halaman utama
 function displayProducts() {
     var products = JSON.parse(localStorage.getItem('products')) || [];
@@ -73,16 +59,3 @@ function removeMetaTagsForProduct(productName) {
         metaCanonical.remove();
     }
 }
-
-// Menangani penghapusan produk saat tombol hapus diklik
-document.getElementById('delete-button').addEventListener('click', function() {
-    var productNameToDelete = // Ambil nama produk yang akan dihapus dari formulir atau data yang sesuai
-    // Hapus produk dari penyimpanan lokal atau database
-    deleteProductLocally(productNameToDelete);
-    
-    // Hapus tag <meta> untuk produk yang dihapus
-    removeMetaTagsForProduct(productNameToDelete);
-    
-    // Lakukan tindakan lain yang diperlukan, misalnya memperbarui tampilan
-});
-

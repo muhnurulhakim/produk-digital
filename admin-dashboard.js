@@ -8,112 +8,6 @@ document.getElementById('product-form').addEventListener('submit', function(even
     // Jika ingin menggunakan fitur unggah ebook, tambahkan kode untuk mengambil URL ebook di sini
 
     // Proses informasi produk sesuai kebutuhan
-    // Misalnya, tampilkan informasi produk di halaman atau simpan di penyimpanan lokal
-    displayProductInfo(productName, productDescription, productImage);
-});
-
-// Fungsi untuk menampilkan informasi produk (contoh)
-function displayProductInfo(name, description, imageUrl) {
-    var productInfo = "Product Name: " + name + "\nDescription: " + description + "\nImage URL: " + imageUrl;
-    alert(productInfo);
-}
-
-// Menangani unggahan produk saat formulir disubmit
-document.getElementById('product-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    var productName = this['product-name'].value;
-    var productDescription = this['product-description'].value;
-    var productImage = this['product-image'].value; // Simpan URL gambar
-    // Jika ingin menggunakan fitur unggah ebook, tambahkan kode untuk mengambil URL ebook di sini
-
-    // Proses informasi produk sesuai kebutuhan
-    // Misalnya, menyimpan informasi produk di penyimpanan lokal atau database
-
-    // Memperbarui meta tags untuk laman utama
-    updateHomePageMetaTags(productName, productDescription, productImage);
-});
-
-// Fungsi untuk memperbarui meta tags di halaman utama
-function updateHomePageMetaTags(name, description, imageUrl) {
-    document.querySelector('meta[property="og:title"]').setAttribute('content', name);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', description);
-    document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
-    // Memperbarui URL jika diperlukan
-    // document.querySelector('meta[property="og:url"]').setAttribute('content', productUrl);
-}
-
-// Fungsi untuk memperbarui meta tags di laman detail produk
-function updateProductDetailMetaTags(name, description, imageUrl, productUrl) {
-    document.querySelector('meta[property="og:title"]').setAttribute('content', name);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', description);
-    document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
-    document.querySelector('meta[property="og:url"]').setAttribute('content', productUrl);
-}
-
-// Menangani unggahan produk saat formulir disubmit
-document.getElementById('product-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    var productName = this['product-name'].value;
-    var productDescription = this['product-description'].value;
-    var productImage = this['product-image'].value; // Simpan URL gambar
-    // Jika ingin menggunakan fitur unggah ebook, tambahkan kode untuk mengambil URL ebook di sini
-
-    // Proses informasi produk sesuai kebutuhan
-    // Misalnya, menyimpan informasi produk di penyimpanan lokal atau database
-
-    // Memperbarui meta tags untuk laman utama
-    updateHomePageMetaTags(productName, productDescription, productImage);
-});
-
-// Fungsi untuk memperbarui meta tags di halaman utama
-function updateHomePageMetaTags(name, description, imageUrl) {
-    document.querySelector('meta[property="og:title"]').setAttribute('content', name);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', description);
-    document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
-    // Memperbarui URL jika diperlukan
-    // document.querySelector('meta[property="og:url"]').setAttribute('content', productUrl);
-}
-
-// Menangani unggahan produk saat formulir disubmit
-document.getElementById('product-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    var productName = this['product-name'].value;
-    var productDescription = this['product-description'].value;
-    var productImage = this['product-image'].value; // Simpan URL gambar
-    // Jika ingin menggunakan fitur unggah ebook, tambahkan kode untuk mengambil URL ebook di sini
-
-    // Proses informasi produk sesuai kebutuhan
-    // Misalnya, menyimpan informasi produk di penyimpanan lokal atau database
-
-    // Memperbarui meta tags untuk laman utama
-    updateHomePageMetaTags(productName, productDescription, productImage);
-
-    // Memperbarui meta tags untuk laman detail produk
-    updateProductDetailMetaTags(productName, productDescription, productImage);
-});
-
-// Fungsi untuk memperbarui meta tags di halaman detail produk
-function updateProductDetailMetaTags(name, description, imageUrl) {
-    document.querySelector('meta[property="og:title"]').setAttribute('content', name);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', description);
-    document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
-    // Memperbarui URL jika diperlukan
-    // document.querySelector('meta[property="og:url"]').setAttribute('content', productUrl);
-}
-
-// Menangani unggahan produk saat formulir disubmit
-document.getElementById('product-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    
-    var productName = this['product-name'].value;
-    var productDescription = this['product-description'].value;
-    var productImage = this['product-image'].value; // Simpan URL gambar
-    // Jika ingin menggunakan fitur unggah ebook, tambahkan kode untuk mengambil URL ebook di sini
-
-    // Proses informasi produk sesuai kebutuhan
     // Misalnya, menyimpan informasi produk di penyimpanan lokal atau database
     saveProductLocally(productName, productDescription, productImage);
 
@@ -124,7 +18,24 @@ document.getElementById('product-form').addEventListener('submit', function(even
     updateProductDetailMetaTags(productName, productDescription, productImage);
 });
 
-// Fungsi untuk menyimpan data produk di penyimpanan lokal (contoh)
+// Fungsi untuk memperbarui meta tags di halaman utama
+function updateHomePageMetaTags(name, description, imageUrl) {
+    document.querySelector('meta[property="og:title"]').setAttribute('content', name);
+    document.querySelector('meta[property="og:description"]').setAttribute('content', description);
+    document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
+    // Memperbarui URL jika diperlukan
+    // document.querySelector('meta[property="og:url"]').setAttribute('content', productUrl);
+}
+
+// Fungsi untuk memperbarui meta tags di halaman detail produk
+function updateProductDetailMetaTags(name, description, imageUrl, productUrl) {
+    document.querySelector('meta[property="og:title"]').setAttribute('content', name);
+    document.querySelector('meta[property="og:description"]').setAttribute('content', description);
+    document.querySelector('meta[property="og:image"]').setAttribute('content', imageUrl);
+    document.querySelector('meta[property="og:url"]').setAttribute('content', productUrl);
+}
+
+// Fungsi untuk menyimpan data produk di penyimpanan lokal
 function saveProductLocally(name, description, imageUrl) {
     var productData = {
         name: name,
@@ -132,10 +43,26 @@ function saveProductLocally(name, description, imageUrl) {
         imageUrl: imageUrl
     };
 
-    // Simpan data produk ke penyimpanan lokal (misalnya menggunakan localStorage)
+    // Simpan data produk ke penyimpanan lokal (menggunakan localStorage)
     var products = JSON.parse(localStorage.getItem('products')) || [];
     products.push(productData);
     localStorage.setItem('products', JSON.stringify(products));
+}
+
+// Fungsi untuk menambahkan tag <meta> untuk produk baru
+function addMetaTagsForProduct(productName) {
+    // Buat elemen <meta> untuk robots dan canonical
+    var metaRobots = document.createElement('meta');
+    metaRobots.setAttribute('name', 'robots');
+    metaRobots.setAttribute('content', 'index, follow');
+
+    var metaCanonical = document.createElement('link');
+    metaCanonical.setAttribute('rel', 'canonical');
+    metaCanonical.setAttribute('href', 'URL_halaman_detail_produk');
+
+    // Tambahkan elemen <meta> ke dalam elemen <head>
+    document.head.appendChild(metaRobots);
+    document.head.appendChild(metaCanonical);
 }
 
 // Tangani klik pada tombol logout
@@ -160,8 +87,8 @@ function removeMetaTagsForProduct(productName) {
     }
 }
 
-    // Menangani penghapusan produk saat tombol hapus diklik
-    document.getElementById('delete-button').addEventListener('click', function() {
+// Menangani penghapusan produk saat tombol hapus diklik
+document.getElementById('delete-button').addEventListener('click', function() {
     var productNameToDelete = // Ambil nama produk yang akan dihapus dari formulir atau data yang sesuai
     // Hapus produk dari penyimpanan lokal atau database
     deleteProductLocally(productNameToDelete);
@@ -171,4 +98,3 @@ function removeMetaTagsForProduct(productName) {
     
     // Lakukan tindakan lain yang diperlukan, misalnya memperbarui tampilan
 });
-
