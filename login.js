@@ -6,7 +6,7 @@ loginForm.addEventListener('submit', function(event) {
     const password = this.password.value;
 
     // Check login credentials
-    if (email === 'muina@duck.com' && password === '?1$1&;):$2&ghqhgahajabh') {
+    if (email === 'muina@duck.com' && password === '007') {
         // Simpan status login di penyimpanan sesi
         sessionStorage.setItem('isLoggedIn', 'true');
 
