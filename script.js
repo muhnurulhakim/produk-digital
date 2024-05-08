@@ -1,48 +1,44 @@
-// Ambil data produk dari penyimpanan lokal dan tampilkan di halaman utama
-function displayProducts() {
-    var products = JSON.parse(localStorage.getItem('products')) || [];
+// Ambil data produk dari file products.json di repositori GitHub Pages
+fetch('products.json')
+  .then(response => response.json())
+  .then(data => {
+    displayProducts(data);
+  })
+  .catch(error => console.error('Error:', error));
 
-    var productListContainer = document.getElementById('product-list');
+function displayProducts(products) {
+  var productListContainer = document.getElementById('product-list');
+  productListContainer.innerHTML = '';
 
-    productListContainer.innerHTML = '';
-
-    products.forEach(function(product) {
-        var productCard = document.createElement('div');
-        productCard.classList.add('product');
-        productCard.setAttribute('id', 'product-' + product.id); // Tambahkan id unik untuk setiap produk
-        productCard.innerHTML = `
-            <img src="${product.imageUrl}" alt="${product.name}">
-            <h2>${product.name}</h2>
-            <p>${product.description}</p>
-            <a href="product-detail.html?id=${product.id}" class="buy-button">Product Details</a>
-        `;
-        productListContainer.appendChild(productCard);
-    });
+  products.forEach(function(product) {
+    var productCard = document.createElement('div');
+    productCard.classList.add('product');
+    productCard.setAttribute('id', 'product-' + product.id);
+    productCard.innerHTML = `
+      <img src="${product.imageUrl}" alt="${product.name}">
+      <h2>${product.name}</h2>
+      <p>${product.description}</p>
+      <a href="product-detail.html?id=${product.id}" class="buy-button">Product Details</a>
+    `;
+    productListContainer.appendChild(productCard);
+  });
 }
-
-// Panggil fungsi untuk menampilkan produk saat halaman dimuat
-displayProducts();
 
 // Menangani klik pada tombol "Product Details"
 document.getElementById('product-list').addEventListener('click', function(event) {
-    if (event.target.classList.contains('buy-button')) {
-        // Dapatkan id produk yang diklik
-        var productId = event.target.parentElement.getAttribute('id').split('-')[1];
-
-        // Simpan id produk yang diklik ke penyimpanan sesi
-        sessionStorage.setItem('selectedProductId', productId);
-    }
+  if (event.target.classList.contains('buy-button')) {
+    var productId = event.target.parentElement.getAttribute('id').split('-')[1];
+    sessionStorage.setItem('selectedProductId', productId);
+  }
 });
 
 // Fungsi untuk memperbarui tag <meta> untuk halaman utama
 function updateHomePageMetaTags(productName, productDescription, productImage) {
-    // Ambil elemen <meta> untuk robots dan canonical
-    var metaRobots = document.querySelector('meta[name="robots"]');
-    var metaCanonical = document.querySelector('link[rel="canonical"]');
+  var metaRobots = document.querySelector('meta[name="robots"]');
+  var metaCanonical = document.querySelector('link[rel="canonical"]');
 
-    // Perbarui konten tag <meta> sesuai dengan informasi produk baru
-    if (metaRobots && metaCanonical) {
-        metaRobots.setAttribute('content', 'index, follow');
-        metaCanonical.setAttribute('href', 'URL_halaman_detail_produk');
-    }
+  if (metaRobots && metaCanonical) {
+    metaRobots.setAttribute('content', 'index, follow');
+    metaCanonical.setAttribute('href', 'URL_halaman_detail_produk');
+  }
 }
