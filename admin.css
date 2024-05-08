@@ -54,10 +54,3 @@ button {
 button:hover {
     background-color: #0056b3;
 }
-
-#logout-button {
-    display: block;
-    margin-top: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
