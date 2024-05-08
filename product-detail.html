@@ -61,17 +61,13 @@
     })
     .catch(error => console.error('Error:', error));
 
-    //salinan kode baru sampai di sini - nanti tambahkan saja setelah lebih dari jam 2 pagi di claudeAI
-    // Fungsi untuk memperbarui tag <meta> untuk halaman detail produk
-    function updateProductDetailMetaTags(productName, productDescription, productImage) {
-        // Ambil elemen <meta> untuk robots dan canonical di halaman detail produk
-        var metaRobots = document.querySelector('meta[name="robots"]');
-        var metaCanonical = document.querySelector('link[rel="canonical"]');
+  // Fungsi untuk memperbarui tag <meta> untuk halaman detail produk
+function updateProductDetailMetaTags(productName, productDescription, productImage) {
+ var metaRobots = document.querySelector('meta[name="robots"]');
+ var metaCanonical = document.querySelector('link[rel="canonical"]');
 
-        // Perbarui konten tag <meta> sesuai dengan informasi produk baru
-        if (metaRobots && metaCanonical) {
-            metaRobots.setAttribute('content', 'index, follow');
-            metaCanonical.setAttribute('href', productDetailUrl);
-        }
-    }
-</script>
+ if (metaRobots && metaCanonical) {
+   metaRobots.setAttribute('content', 'index, follow');
+   metaCanonical.setAttribute('href', productDetailUrl);
+ }
+}
