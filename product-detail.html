@@ -1,62 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Detail</title>
-    <!-- Meta tags for social media sharing -->
-    <meta property="og:title" content="Product Detail">
-    <meta property="og:description" content="Description of selected product">
-    <meta property="og:image" content="URL to thumbnail image of selected product">
-    <meta property="og:url" content="URL to product detail page">
-    <meta property="og:type" content="product">
-    <!-- Add other meta tags for SEO if needed -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Detail</title>
+  <!-- Meta tags for social media sharing -->
+  <meta property="og:title" content="Product Detail">
+  <meta property="og:description" content="Description of selected product">
+  <meta property="og:image" content="URL to thumbnail image of selected product">
+  <meta property="og:url" content="URL to product detail page">
+  <meta property="og:type" content="product">
+  <!-- Add other meta tags for SEO if needed -->
 </head>
 <body>
-    <header>
-        <h1 id="product-title">Product Detail</h1>
-    </header>
-    <main>
-        <div id="product-details">
-            <!-- Detail produk akan ditampilkan di sini -->
-        </div>
-    </main>
-    <!-- Add footer or other elements if needed -->
+  <header>
+    <h1 id="product-title">Product Detail</h1>
+  </header>
+  <main>
+    <div id="product-details">
+      <!-- Detail produk akan ditampilkan di sini -->
+    </div>
+  </main>
+  <!-- Add footer or other elements if needed -->
 </body>
 </html>
 <script>
-    // Ambil judul produk yang dipilih dari penyimpanan sesi
-    var urlParams = new URLSearchParams(window.location.search);
-    var selectedProductId = urlParams.get('id');
+  // Ambil judul produk yang dipilih dari penyimpanan sesi
+  var urlParams = new URLSearchParams(window.location.search);
+  var selectedProductId = urlParams.get('id');
 
-    // Menampilkan judul produk yang dipilih di judul halaman
-    document.title = selectedProductId;
+  // Menampilkan judul produk yang dipilih di judul halaman
+  document.title = selectedProductId;
 
-    // Ambil data produk dari penyimpanan lokal berdasarkan id produk yang dipilih
-    var products = JSON.parse(localStorage.getItem('products')) || [];
-    var selectedProductData = products.find(function(product) {
+  // Ambil data produk dari file products.json di repositori GitHub Pages
+  fetch('products.json')
+    .then(response => response.json())
+    .then(data => {
+      var selectedProductData = data.find(function(product) {
         return product.id === selectedProductId;
-    });
+      });
 
-    // Memperbarui meta tags untuk social media sharing
-    document.querySelector('meta[property="og:title"]').setAttribute('content', selectedProductData.name);
-    document.querySelector('meta[property="og:description"]').setAttribute('content', selectedProductData.description);
-    document.querySelector('meta[property="og:image"]').setAttribute('content', selectedProductData.imageUrl);
-    // Memperbarui URL jika diperlukan
-    // document.querySelector('meta[property="og:url"]').setAttribute('content', productUrl);
+      // Memperbarui meta tags untuk social media sharing
+      document.querySelector('meta[property="og:title"]').setAttribute('content', selectedProductData.name);
+      document.querySelector('meta[property="og:description"]').setAttribute('content', selectedProductData.description);
+      document.querySelector('meta[property="og:image"]').setAttribute('content', selectedProductData.imageUrl);
+      // Memperbarui URL jika diperlukan
+      // document.querySelector('meta[property="og:url"]').setAttribute('content', productUrl);
 
-    // Menampilkan detail produk yang dipilih
-    var productDetailsContainer = document.getElementById('product-details');
-    productDetailsContainer.innerHTML = `
+      // Menampilkan detail produk yang dipilih
+      var productDetailsContainer = document.getElementById('product-details');
+      productDetailsContainer.innerHTML = `
         <img src="${selectedProductData.imageUrl}" alt="${selectedProductData.name}">
         <h2>${selectedProductData.name}</h2>
         <p>${selectedProductData.description}</p>
         <a href="#" class="buy-button">Beli Sekarang</a>
-    `;
+      `;
 
-    // Memperbarui tag <meta> untuk halaman detail produk
-    updateProductDetailMetaTags(selectedProductData.name, selectedProductData.description, selectedProductData.imageUrl);
+      // Memperbarui tag <meta> untuk halaman detail produk
+      updateProductDetailMetaTags(selectedProductData.name, selectedProductData.description, selectedProductData.imageUrl);
+    })
+    .catch(error => console.error('Error:', error));
 
+    //salinan kode baru sampai di sini - nanti tambahkan saja setelah lebih dari jam 2 pagi di claudeAI
     // Fungsi untuk memperbarui tag <meta> untuk halaman detail produk
     function updateProductDetailMetaTags(productName, productDescription, productImage) {
         // Ambil elemen <meta> untuk robots dan canonical di halaman detail produk
