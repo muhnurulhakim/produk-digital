@@ -11,6 +11,7 @@
   <meta property="og:url" content="URL to product detail page">
   <meta property="og:type" content="product">
   <!-- Add other meta tags for SEO if needed -->
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
@@ -62,12 +63,13 @@
     .catch(error => console.error('Error:', error));
 
   // Fungsi untuk memperbarui tag <meta> untuk halaman detail produk
-function updateProductDetailMetaTags(productName, productDescription, productImage) {
- var metaRobots = document.querySelector('meta[name="robots"]');
- var metaCanonical = document.querySelector('link[rel="canonical"]');
+  function updateProductDetailMetaTags(productName, productDescription, productImage) {
+    var metaRobots = document.querySelector('meta[name="robots"]');
+    var metaCanonical = document.querySelector('link[rel="canonical"]');
 
- if (metaRobots && metaCanonical) {
-   metaRobots.setAttribute('content', 'index, follow');
-   metaCanonical.setAttribute('href', productDetailUrl);
- }
-}
+    if (metaRobots && metaCanonical) {
+      metaRobots.setAttribute('content', 'index, follow');
+      metaCanonical.setAttribute('href', productDetailUrl);
+    }
+  }
+</script>
