@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function() {
+
 // Menangani unggahan file saat formulir disubmit
 document.getElementById('product-form').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -90,4 +92,6 @@ document.getElementById('logout-button').addEventListener('click', function() {
     sessionStorage.removeItem('isLoggedIn');
     // Redirect pengguna ke halaman login
     window.location.href = 'login.html';
+});
+
 });
